@@ -609,7 +609,7 @@ if(isset($conn) && isset($user_id)) {
   <nav>
     <div class="logo">Hungry Potter’s</div>
     <ul>
-      <li><a href="home.php" class="<?php if(basename($_SERVER['PHP_SELF'])=='home.php') echo 'active'; ?>">Home</a></li>
+      <li><a href="index.php" class="<?php if(basename($_SERVER['PHP_SELF'])=='index.php') echo 'active'; ?>">Home</a></li>
       <li><a href="shop.php" class="<?php if(basename($_SERVER['PHP_SELF'])=='shop.php') echo 'active'; ?>">Menu</a></li>
       <li><a href="contact.php" class="<?php if(basename($_SERVER['PHP_SELF'])=='contact.php') echo 'active'; ?>">Contact</a></li>
       <li><a href="about.php" class="<?php if(basename($_SERVER['PHP_SELF'])=='about.php') echo 'active'; ?>">About</a></li>
@@ -862,7 +862,7 @@ document.addEventListener('click', function(e) {
       <div class="footer-col">
         <h4>Quick Links</h4>
         <ul>
-          <li><a href="home.php">Home</a></li>
+          <li><a href="index.php">Home</a></li>
           <li><a href="shop.php">Menu</a></li>
           <li><a href="contact.php">Contact</a></li>
           <li><a href="about.php">About</a></li>
