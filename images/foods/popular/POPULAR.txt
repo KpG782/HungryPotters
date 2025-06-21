@@ -1,0 +1,19 @@
+POPULAR
+-Sisiglog			
+	Price: Php 90
+	Details: Silog meal incorporating sisig, garlic fried rice, and a sunny-side-up egg.
+-Porksilog
+	Price: Php 90
+	Details: Silog meal featuring pork, garlic fried rice, and a sunny-side-up egg.
+-Tapsilog
+	Price: Php 90
+	Details: Traditional Filipino breakfast with beef tapa, fried rice, and fried egg.
+-Chicksilog
+	Price: Php 90
+	Details: Silog meal consisting of chicken, garlic fried rice, and a sunny-side-up egg.
+-Wings & Dip
+	Price: Php 180
+	Details: Chicken wings served with a dipping sauce for a flavorful snack or meal.
+-Spamsilog
+	Price: Php 89
+	Details: Silog meal incorporating sisig, garlic fried rice, and a sunny-side-up egg.

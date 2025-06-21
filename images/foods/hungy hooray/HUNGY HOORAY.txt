@@ -1,0 +1,16 @@
+HUNGY HOORAY
+- Beshy Sisig 
+	Price: Php 159
+	Details: Sizzling Filipino dish with diced pork, onions, and chili peppers. Good For 2 people.
+- Tapsilog
+	Price: Php 90 
+	Details: Traditional Filipino breakfast with beef tapa, fried rice, and fried egg.
+- Basmati Rice
+	Price: Php 15
+	Details: Fragrant long-grain rice.
+- Barkada Sisig
+	Price: Php 239
+	Details: Sizzling Filipino dish with diced pork, onions, and chili peppers. Good For 3-4 people.
+- Extra Garlic Rice
+	Price: Php 20
+	Details: Rice cooked with an abundance of garlic for an aromatic and flavorful twist.

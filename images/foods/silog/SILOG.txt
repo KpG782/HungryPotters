@@ -1,0 +1,34 @@
+SILOG MEALS
+- Porksilog
+	Price: Php 90
+	Details: Silog meal featuring pork, garlic fried rice, and a sunny-side-up egg.
+- Chicksilog
+	Price: Php 90
+	Details: Silog meal consisting of chicken, garlic fried rice, and a sunny-side-up egg.
+- Sisiglog
+	Price: Php 90
+	Details: Silog meal incorporating sisig, garlic fried rice, and a sunny-side-up egg.
+- Spamsilog
+	Price:  Php 89
+	Details: Silog meal comprising SPAM, garlic fried rice, and a sunny-side-up egg.
+- Bangsilog
+	Price: Php 90
+	Details: Silog meal composed of bangus (milkfish), garlic fried rice, and a sunny-side-up egg.
+- Embosilog
+	Price:  Php 90
+	Details: Silog meal including embutido (Filipino-style meatloaf), garlic fried rice, and a sunny-side-up egg.
+- Tocilog
+	Price:  Php 89
+	Details: Silog meal made with tocino (sweet cured pork), garlic fried rice, and a sunny-side-up egg.
+- Baconsilog
+	Price: Php 89
+	Details: Silog meal featuring bacon, garlic fried rice, and a sunny-side-up egg.
+- Cornsilog
+	Price:  Php 78
+	Details: Silog meal combining corned beef, garlic fried rice, and a sunny-side-up egg.
+- Hotsilog
+	Price:  Php 72
+	Details: Silog meal with hotdog, garlic fried rice, and a sunny-side-up egg.
+- Longsilog
+	Price:  Php 72
+	Details: Silog meal consisting of longganisa (Filipino sausage), garlic fried rice, and a sunny-side-up egg.
