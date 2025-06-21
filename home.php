@@ -198,7 +198,7 @@
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
-    gap: 2.5rem;
+    gap: 1.2rem;
     justify-content: center;
     text-align: center;
   }
@@ -458,22 +458,71 @@
   }
 
   /* Animation Keyframes */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
   @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fadein { animation: fadeIn 1s ease; }
+  .animate-fadeup { animation: fadeUp 1s cubic-bezier(.4,0,.2,1); }
+  .stagger-fadeup > .home-section, .stagger-fadeup > .feature-box {
+    opacity: 0;
+    transform: translateY(40px);
+    animation: fadeUp 0.7s cubic-bezier(.4,0,.2,1) forwards;
+  }
+  .stagger-fadeup > .home-section:nth-child(1), .stagger-fadeup > .feature-box:nth-child(1) { animation-delay: 0.1s; }
+  .stagger-fadeup > .home-section:nth-child(2), .stagger-fadeup > .feature-box:nth-child(2) { animation-delay: 0.2s; }
+  .stagger-fadeup > .home-section:nth-child(3), .stagger-fadeup > .feature-box:nth-child(3) { animation-delay: 0.3s; }
+  .stagger-fadeup > .home-section:nth-child(4), .stagger-fadeup > .feature-box:nth-child(4) { animation-delay: 0.4s; }
+
+  /* Specials Animation */
+  @keyframes fadeUpSpecial {
     0% { opacity: 0; transform: translateY(40px); }
     100% { opacity: 1; transform: translateY(0); }
   }
-  @keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+  @keyframes scaleIn {
+    0% { opacity: 0; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1); }
   }
-  /* Animation Classes */
-  .animate-fadeup {
+  .animate-special {
     opacity: 0;
-    animation: fadeUp 0.8s cubic-bezier(.4,1.4,.6,1) forwards;
+    animation: fadeUpSpecial 1s cubic-bezier(.4,1.4,.6,1) 0.2s forwards;
   }
-  .animate-fadein {
+  .special-img-animate img {
+    transition: transform 0.4s cubic-bezier(.4,1.4,.6,1), box-shadow 0.4s;
+  }
+  .special-img-animate img:hover {
+    transform: scale(1.07) rotate(-2deg);
+    box-shadow: 0 8px 32px 0 rgba(243,156,18,0.18);
+  }
+  .special-content-animate {
     opacity: 0;
-    animation: fadeIn 1.2s cubic-bezier(.4,1.4,.6,1) forwards;
+    animation: fadeUpSpecial 1s cubic-bezier(.4,1.4,.6,1) 0.5s forwards;
+  }
+  .special-list-item {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUpSpecial 0.7s cubic-bezier(.4,1.4,.6,1) forwards;
+  }
+  .special-list-item:nth-child(1) { animation-delay: 0.2s; }
+  .special-list-item:nth-child(2) { animation-delay: 0.35s; }
+  .special-list-item:nth-child(3) { animation-delay: 0.5s; }
+  .special-list-item:nth-child(4) { animation-delay: 0.65s; }
+  .special-list-item:nth-child(5) { animation-delay: 0.8s; }
+  .special-list-item:nth-child(6) { animation-delay: 0.95s; }
+  .special-btn-animate {
+    opacity: 0;
+    transform: scale(0.9);
+    animation: scaleIn 0.7s cubic-bezier(.4,1.4,.6,1) 1.1s forwards;
+    transition: transform 0.2s;
+  }
+  .special-btn-animate:hover {
+    transform: scale(1.08);
+    background: #fff;
+    color: var(--clr-accent);
   }
   </style>
   <script>
@@ -489,6 +538,42 @@
     document.querySelector('.silog-meals').classList.add('animate-fadeup');
     // Footer
     document.querySelector('footer').classList.add('animate-fadein');
+  });
+
+  // Specials animation trigger
+  window.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+      document.querySelector('.animate-special').style.opacity = 1;
+      document.querySelector('.special-content-animate').style.opacity = 1;
+      document.querySelectorAll('.special-list-item').forEach(function(item) {
+        item.style.opacity = 1;
+        item.style.transform = 'translateY(0)';
+      });
+      document.querySelector('.special-btn-animate').style.opacity = 1;
+      document.querySelector('.special-btn-animate').style.transform = 'scale(1)';
+    }, 300);
+  });
+
+  // Toggle profile dropdown
+  const userBtn = document.getElementById('user-btn');
+  const profileDropdown = document.getElementById('profile-dropdown');
+  userBtn && userBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    profileDropdown.classList.toggle('active');
+  });
+  document.addEventListener('click', function(e) {
+    if (!userBtn.contains(e.target) && !profileDropdown.contains(e.target)) {
+      profileDropdown.classList.remove('active');
+    }
+  });
+
+  // Staggered fade-up animation for home sections
+  window.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('.home-hero')?.classList.add('animate-fadeup');
+    document.querySelectorAll('.stagger-fadeup').forEach(function(el) {
+      el.classList.add('stagger-fadeup');
+    });
+    document.querySelector('footer')?.classList.add('animate-fadein');
   });
   </script>
 </head>
@@ -626,44 +711,7 @@ document.addEventListener('click', function(e) {
     </div>
   </section>
 
-
-  <!-- ABOUT SECTION -->
-  <section class="about-section" style="margin-top: 3rem;">
-    <div class="about-row">
-      <div class="about-img">
-        <img src="images/nobg.png" alt="About Hungry Potter's" />
-      </div>
-      <div class="about-content">
-        <small>special moments</small>
-        <h2>ABOUT US</h2>
-        <div class="about-cards">
-          <div class="about-card">
-            <img src="images/chicken-wings.png" alt="Traditional" />
-          </div>
-          <div class="about-card about-center">
-            <h3>TRADITIONAL & MODERN</h3>
-            <p>Silog at paboritong ulam under one roof! We serve classic Filipino comfort food and modern favorites, always with a smile.</p>
-            <a href="about.php" class="about-btn">Read More</a>
-          </div>
-          <div class="about-card">
-            <img src="images/hungry meals.png" alt="Modern" />
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <style>
-  .about-section {
-    margin-top: 3rem !important;
-  }
-  @media (max-width: 900px) {
-    .about-section {
-      margin-top: 2rem !important;
-    }
-  }
-  </style>
-
+  
   <!-- SILOG MEALS LIST -->
   <section class="silog-meals">
     <h2>Silog Meals</h2>
@@ -748,40 +796,69 @@ document.addEventListener('click', function(e) {
     </ul>
   </section>
 
+  <!-- ABOUT SECTION -->
+  <section class="about-section" style="margin-top: 3rem;">
+    <div class="about-row">
+      <div class="about-img">
+        <img src="images/nobg.png" alt="About Hungry Potter's" />
+      </div>
+      <div class="about-content">
+        <small>special moments</small>
+        <h2>ABOUT US</h2>
+        <div class="about-cards">
+          <div class="about-card">
+            <img src="images/chicken-wings.png" alt="Traditional" />
+          </div>
+          <div class="about-card about-center">
+            <h3>TRADITIONAL & MODERN</h3>
+            <p>Silog at paboritong ulam under one roof! We serve classic Filipino comfort food and modern favorites, always with a smile.</p>
+            <a href="about.php" class="about-btn">Read More</a>
+          </div>
+          <div class="about-card">
+            <img src="images/hungry meals.png" alt="Modern" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+  .about-section {
+    margin-top: 3rem !important;
+  }
+  @media (max-width: 900px) {
+    .about-section {
+      margin-top: 2rem !important;
+    }
+  }
+  </style>
+
+
     <!-- SPECIALS SECTION -->
-  <section class="special-section">
+  <section class="special-section animate-special">
   <div class="special-row">
-    <div class="special-img">
+    <div class="special-img special-img-animate">
       <img src="images/foods/wings and dips/wings and dip.jpg" alt="Hungry Hooray Specials" />
     </div>
-    <div class="special-content">
+    <div class="special-content special-content-animate">
       <small>HUNGRY HOORAY</small>
       <h2>SPECIALS</h2>
       <ul class="special-list">
-        <li>
-          <span>Wings & Dip</span>
-          <span>₱180</span>
-        </li>
-        <li style="font-size:0.95rem; color:#ccc; margin-bottom:0.7rem; border:none;">Chicken wings served with a dipping sauce for a flavorful snack or meal.</li>
-        <li>
-          <span>Beshy Sisig</span>
-          <span>₱159</span>
-        </li>
-        <li style="font-size:0.95rem; color:#ccc; margin-bottom:0.7rem; border:none;">Sizzling Filipino dish with diced pork, onions, and chili peppers. Good For 2 people.</li>
-        <li>
-          <span>Barkada Sisig</span>
-          <span>₱239</span>
-        </li>
-        <li style="font-size:0.95rem; color:#ccc; margin-bottom:0.7rem; border:none;">Sizzling Filipino dish with diced pork, onions, and chili peppers. Good For 3-4 people.</li>
+        <li class="special-list-item"><span>Wings & Dip</span><span>₱180</span></li>
+        <li class="special-list-item" style="font-size:0.95rem; color:#ccc; margin-bottom:0.7rem; border:none;">Chicken wings served with a dipping sauce for a flavorful snack or meal.</li>
+        <li class="special-list-item"><span>Beshy Sisig</span><span>₱159</span></li>
+        <li class="special-list-item" style="font-size:0.95rem; color:#ccc; margin-bottom:0.7rem; border:none;">Sizzling Filipino dish with diced pork, onions, and chili peppers. Good For 2 people.</li>
+        <li class="special-list-item"><span>Barkada Sisig</span><span>₱239</span></li>
+        <li class="special-list-item" style="font-size:0.95rem; color:#ccc; margin-bottom:0.7rem; border:none;">Sizzling Filipino dish with diced pork, onions, and chili peppers. Good For 3-4 people.</li>
       </ul>
-      <a href="shop.php" class="about-btn">View More</a>
+      <a href="shop.php" class="about-btn special-btn-animate">View More</a>
     </div>
   </div>
 </section>
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-content">
+    <div class="footer-content" style="gap:1.2rem;">
       <div class="footer-col">
         <h4>Quick Links</h4>
         <ul>
@@ -799,15 +876,15 @@ document.addEventListener('click', function(e) {
           <li><i class="fas fa-map-marker-alt"></i> Makati City, Philippines</li>
         </ul>
       </div>
-<div class="footer-col">
-      <h4>Follow Us</h4>
-      <div class="footer-socials">
-        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
-        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
-        <a href="#" title="Tiktok"><i class="fab fa-tiktok"></i></a>
+      <div class="footer-col">
+        <h4>Follow Us</h4>
+        <div class="footer-socials">
+          <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" title="Tiktok"><i class="fab fa-tiktok"></i></a>
+        </div>
       </div>
-    </div>
     </div>
     <div class="credit">
       &copy; 2025 <span>Hungry Potter’s Tapsilogan</span> – All rights reserved.
@@ -815,106 +892,14 @@ document.addEventListener('click', function(e) {
   </footer>
 
   <style>
-  footer {
-    background: var(--clr-bg);
-    color: var(--clr-light);
-    padding: 3rem 2rem 1.5rem 2rem;
-    border-top: 2px solid var(--clr-accent);
-    margin-top: 3rem;
-  }
   .footer-content {
     max-width: 1100px;
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
-    gap: 2.5rem;
-    justify-content: center;
-    text-align: center;
-  }
-  .footer-col {
-    flex: 1 1 220px;
-    min-width: 220px;
-    align-items: center;
-    text-align: center;
-    padding: 0 1rem;
-  }
-  .footer-col h4 {
-    font-family: var(--font-h);
-    margin-bottom: 1.2rem;
-    font-size: 1.2rem;
-    color: var(--clr-accent);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-  .footer-col ul {
-    list-style: none;
-    padding: 0;
-    margin: 0 auto;
-    display: inline-block;
-    text-align: left;
-  }
-  .footer-col ul li {
-    margin-bottom: .7rem;
-    font-size: 1rem;
-    color: var(--clr-light);
-    display: flex;
-    align-items: center;
-    gap: 0.6em;
-  }
-  .footer-col ul li a {
-    color: var(--clr-light);
-    transition: color var(--trans);
-  }
-  .footer-col ul li a:hover {
-    color: var(--clr-accent);
-  }
-  .footer-socials {
-    display: flex;
-    justify-content: center;
     gap: 1.2rem;
-    margin-top: 0.5rem;
-  }
-  .footer-socials a {
-    color: var(--clr-light);
-    font-size: 1.5rem;
-    background: #222;
-    border-radius: 50%;
-    width: 2.5rem;
-    height: 2.5rem;
-    display: flex;
-    align-items: center;
     justify-content: center;
-    transition: background var(--trans), color var(--trans);
-  }
-  .footer-socials a:hover {
-    background: var(--clr-accent);
-    color: var(--clr-bg);
-  }
-  .credit {
     text-align: center;
-    margin-top: 2.5rem;
-    font-size: .95rem;
-    color: var(--clr-light);
-    letter-spacing: 0.5px;
-  }
-  .credit span {
-    color: var(--clr-accent);
-    font-weight: 600;
-  }
-  @media (max-width: 900px) {
-    .footer-content {
-      flex-direction: column;
-      align-items: center;
-      gap: 1.5rem;
-    }
-    .footer-col {
-      min-width: unset;
-      padding: 0;
-    }
-    .footer-col ul {
-      text-align: center;
-      display: block;
-    }
   }
   </style>
 </body>

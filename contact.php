@@ -364,6 +364,23 @@ if(isset($_POST['send'])){
     color: var(--clr-accent);
     font-weight: 600;
   }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fadein { animation: fadeIn 1s ease; }
+  .animate-fadeup { animation: fadeUp 1s cubic-bezier(.4,0,.2,1); }
+  .stagger-fadeup > .contact-details, .stagger-fadeup > .contact-form {
+    opacity: 0;
+    transform: translateY(40px);
+    animation: fadeUp 0.7s cubic-bezier(.4,0,.2,1) forwards;
+  }
+  .stagger-fadeup > .contact-details { animation-delay: 0.1s; }
+  .stagger-fadeup > .contact-form { animation-delay: 0.3s; }
   @media (max-width: 900px) {
     .contact-hero { flex-direction: column; gap: 2rem; }
     .contact-hero-content { align-items: center; text-align: center; }
@@ -471,11 +488,10 @@ if(isset($_POST['send'])){
   </div>
 </footer>
 <script>
-// Animate on load
 window.addEventListener('DOMContentLoaded', function() {
-  document.querySelector('.contact-hero').classList.add('animate-fadeup');
-  document.querySelector('.contact-section').classList.add('animate-fadeup');
-  document.querySelector('footer').classList.add('animate-fadein');
+  document.querySelector('.contact-hero')?.classList.add('animate-fadeup');
+  document.querySelector('.contact-section')?.classList.add('stagger-fadeup');
+  document.querySelector('footer')?.classList.add('animate-fadein');
 });
 </script>
 </body>

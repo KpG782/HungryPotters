@@ -269,6 +269,25 @@ if(isset($_SESSION['user_id'])){
     color: var(--clr-accent);
     font-weight: 600;
   }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fadein { animation: fadeIn 1s ease; }
+  .animate-fadeup { animation: fadeUp 1s cubic-bezier(.4,0,.2,1); }
+  .stagger-fadeup > .about-fact {
+    opacity: 0;
+    transform: translateY(40px);
+    animation: fadeUp 0.7s cubic-bezier(.4,0,.2,1) forwards;
+  }
+  .stagger-fadeup > .about-fact:nth-child(1) { animation-delay: 0.1s; }
+  .stagger-fadeup > .about-fact:nth-child(2) { animation-delay: 0.2s; }
+  .stagger-fadeup > .about-fact:nth-child(3) { animation-delay: 0.3s; }
+  .stagger-fadeup > .about-fact:nth-child(4) { animation-delay: 0.4s; }
   @media (max-width: 900px) {
     .about-hero { flex-direction: column; gap: 2rem; }
     .about-hero-content { align-items: center; text-align: center; }
@@ -363,10 +382,11 @@ if(isset($_SESSION['user_id'])){
   </div>
 </footer>
 <script>
-// Animate on load
 window.addEventListener('DOMContentLoaded', function() {
-  document.querySelector('.about-hero').classList.add('animate-fadeup');
-  document.querySelector('.about-facts').classList.add('animate-fadeup');
-  document.querySelector('footer').classList.add('animate-fadein');
+  document.querySelector('.about-hero')?.classList.add('animate-fadeup');
+  document.querySelector('.about-facts')?.classList.add('stagger-fadeup');
+  document.querySelector('footer')?.classList.add('animate-fadein');
 });
 </script>
+</body>
+</html>

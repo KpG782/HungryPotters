@@ -313,6 +313,65 @@ include 'components/wishlist_cart.php';
     font-size: 1.1rem;
     margin: 2rem 0;
   }
+  /* STATIC FOOD SECTIONS */
+  .static-foods {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .category-title {
+    font-family: var(--font-h);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    color: var(--clr-accent);
+    position: relative;
+  }
+  .category-title::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background: var(--clr-accent);
+  }
+  .static-foods .box {
+    background: #222;
+    border-radius: .7rem;
+    padding: 1.5rem;
+    text-align: center;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .static-foods .box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+  }
+  .static-foods .box img {
+    width: 100%;
+    height: auto;
+    max-width: 200px;
+    border-radius: .5rem;
+    margin-bottom: 1rem;
+  }
+  .static-foods .box .name {
+    font-family: var(--font-h);
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: .5rem;
+    color: #fff;
+  }
+  .static-foods .box .price {
+    color: var(--clr-accent);
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-bottom: .3rem;
+  }
+  .static-foods .box .details {
+    color: #ccc;
+    font-size: .9rem;
+    line-height: 1.4;
+  }
   /* FOOTER */
   footer {
     background: var(--clr-bg);
@@ -419,13 +478,30 @@ include 'components/wishlist_cart.php';
     }
   }
   @keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
-  .animate-fadein {
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fadein { animation: fadeIn 1s ease; }
+  .animate-fadeup { animation: fadeUp 1s cubic-bezier(.4,0,.2,1); }
+  .stagger-fadeup > .box {
     opacity: 0;
-    animation: fadeIn 1.2s cubic-bezier(.4,1.4,.6,1) forwards;
+    transform: translateY(40px);
+    animation: fadeUp 0.7s cubic-bezier(.4,0,.2,1) forwards;
   }
+  .stagger-fadeup > .box:nth-child(1) { animation-delay: 0.1s; }
+  .stagger-fadeup > .box:nth-child(2) { animation-delay: 0.2s; }
+  .stagger-fadeup > .box:nth-child(3) { animation-delay: 0.3s; }
+  .stagger-fadeup > .box:nth-child(4) { animation-delay: 0.4s; }
+  .stagger-fadeup > .box:nth-child(5) { animation-delay: 0.5s; }
+  .stagger-fadeup > .box:nth-child(6) { animation-delay: 0.6s; }
+  .stagger-fadeup > .box:nth-child(7) { animation-delay: 0.7s; }
+  .stagger-fadeup > .box:nth-child(8) { animation-delay: 0.8s; }
+  .stagger-fadeup > .box:nth-child(9) { animation-delay: 0.9s; }
+  .stagger-fadeup > .box:nth-child(10) { animation-delay: 1s; }
   </style>
   <script>
   // Toggle profile dropdown
@@ -443,6 +519,13 @@ include 'components/wishlist_cart.php';
         }
       });
     }
+  });
+  window.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('.hero')?.classList.add('animate-fadeup');
+    document.querySelectorAll('.static-foods .box-container').forEach(function(boxCont) {
+      boxCont.classList.add('stagger-fadeup');
+    });
+    document.querySelector('footer')?.classList.add('animate-fadein');
   });
   </script>
 </head>
@@ -520,37 +603,172 @@ if(isset($conn) && isset($user_id)) {
     <p>Browse our delicious silog meals, snacks, and specials. All dishes are made fresh and served with a smile!</p>
   </div>
 </section>
-<!-- PRODUCTS SECTION -->
-<section class="products">
-  <h1 class="heading">latest menu</h1>
+<!-- STATIC FOOD SECTIONS -->
+<section class="static-foods">
+  <!-- HUNGRY HOORAY -->
+  <h2 class="category-title">HUNGRY HOORAY</h2>
   <div class="box-container">
-  <?php
-    $select_products = $conn->prepare("SELECT * FROM `products`"); 
-    $select_products->execute();
-    if($select_products->rowCount() > 0){
-      while($fetch_product = $select_products->fetch(PDO::FETCH_ASSOC)){
-  ?>
-  <form action="" method="post" class="box">
-    <input type="hidden" name="pid" value="<?= $fetch_product['id']; ?>">
-    <input type="hidden" name="name" value="<?= $fetch_product['name']; ?>">
-    <input type="hidden" name="price" value="<?= $fetch_product['price']; ?>">
-    <input type="hidden" name="image" value="<?= $fetch_product['image_01']; ?>">
-    <button class="fas fa-heart" type="submit" name="add_to_wishlist"></button>
-    <a href="quick_view.php?pid=<?= $fetch_product['id']; ?>" class="fas fa-eye"></a>
-    <img src="uploaded_img/<?= $fetch_product['image_01']; ?>" alt="<?= htmlspecialchars($fetch_product['name']); ?>">
-    <div class="name"><?= $fetch_product['name']; ?></div>
-    <div class="flex">
-      <div class="price"><span>PHP </span><?= $fetch_product['price']; ?><span>/-</span></div>
-      <input type="number" name="qty" class="qty" min="1" max="99" onkeypress="if(this.value.length == 2) return false;" value="1">
+    <div class="box">
+      <img src="images/foods/hungy hooray/beshysisig.jpg" alt="Beshy Sisig">
+      <div class="name">Beshy Sisig</div>
+      <div class="price">Php 159</div>
+      <div class="details">Sizzling Filipino dish with diced pork, onions, and chili peppers. Good For 2 people.</div>
     </div>
-    <input type="submit" value="add to cart" class="btn" name="add_to_cart">
-  </form>
-  <?php
-      }
-    }else{
-      echo '<p class="empty">No Dishes Found!</p>';
-    }
-  ?>
+    <div class="box">
+      <img src="images/foods/hungy hooray/tapsilog.jpg" alt="Tapsilog">
+      <div class="name">Tapsilog</div>
+      <div class="price">Php 90</div>
+      <div class="details">Traditional Filipino breakfast with beef tapa, fried rice, and fried egg.</div>
+    </div>
+    <div class="box">
+      <img src="images/foods/hungy hooray/basmatirice.jpg" alt="Basmati Rice">
+      <div class="name">Basmati Rice</div>
+      <div class="price">Php 15</div>
+      <div class="details">Fragrant long-grain rice.</div>
+    </div>
+    <div class="box">
+      <img src="images/foods/hungy hooray/barkada sisig.jpg" alt="Barkada Sisig">
+      <div class="name">Barkada Sisig</div>
+      <div class="price">Php 239</div>
+      <div class="details">Sizzling Filipino dish with diced pork, onions, and chili peppers. Good For 3-4 people.</div>
+    </div>
+    <div class="box">
+      <img src="images/foods/hungy hooray/garlicrice.jpg" alt="Extra Garlic Rice">
+      <div class="name">Extra Garlic Rice</div>
+      <div class="price">Php 20</div>
+      <div class="details">Rice cooked with an abundance of garlic for an aromatic and flavorful twist.</div>
+    </div>
+  </div>
+  <!-- HUNGRY MEALS -->
+  <h2 class="category-title">HUNGRY MEALS</h2>
+  <div class="box-container">
+    <div class="box">
+      <img src="images/foods/hungry meals/Meal B.jpg" alt="Set B">
+      <div class="name">Set B</div>
+      <div class="price">Php 230</div>
+      <div class="details">Serve with 2 rice, chicken wing 3 pcs, fish fillet.</div>
+    </div>
+  </div>
+  
+  <!-- POPULAR -->
+  <h2 class="category-title">POPULAR</h2>
+  <div class="box-container">
+    <div class="box">
+      <img src="images/foods/popular/sisiglog.jpg" alt="Sisiglog">
+      <div class="name">Sisiglog</div>
+      <div class="price">Php 90</div>
+      <div class="details">Silog meal incorporating sisig, garlic fried rice, and a sunny-side-up egg.</div>
+    </div>
+    <div class="box">
+      <img src="images/foods/popular/porksilog.jpg" alt="Porksilog">
+      <div class="name">Porksilog</div>
+      <div class="price">Php 90</div>
+      <div class="details">Silog meal featuring pork, garlic fried rice, and a sunny-side-up egg.</div>
+    </div>
+    <div class="box">
+      <img src="images/foods/popular/tapsilog.jpg" alt="Tapsilog">
+      <div class="name">Tapsilog</div>
+      <div class="price">Php 90</div>
+      <div class="details">Traditional Filipino breakfast with beef tapa, fried rice, and fried egg.</div>
+    </div>
+    <div class="box">
+      <img src="images/foods/popular/Chicksilog.jpg" alt="Chicksilog">
+      <div class="name">Chicksilog</div>
+      <div class="price">Php 90</div>
+      <div class="details">Silog meal consisting of chicken, garlic fried rice, and a sunny-side-up egg.</div>
+    </div>
+    <div class="box">
+      <img src="images/foods/popular/wings and dip.jpg" alt="Wings & Dip">
+      <div class="name">Wings & Dip</div>
+      <div class="price">Php 180</div>
+      <div class="details">Chicken wings served with a dipping sauce for a flavorful snack or meal.</div>
+    </div>
+    <div class="box">
+      <img src="images/foods/popular/spamsilog.jpg" alt="Spamsilog">
+      <div class="name">Spamsilog</div>
+      <div class="price">Php 89</div>
+      <div class="details">Silog meal incorporating sisig, garlic fried rice, and a sunny-side-up egg.</div>
+    </div>
+  </div>
+  <!-- SILOG MEALS -->
+  <h2 class="category-title">SILOG MEALS</h2>
+  <div class="box-container">
+    <div class="box">
+      <img src="images/foods/silog/porksilog.jpg" alt="Porksilog">
+      <div class="name">Porksilog</div>
+      <div class="price">Php 90</div>
+      <div class="details">Silog meal featuring pork, garlic fried rice, and a sunny-side-up egg.</div>
+    </div>
+    <div class="box">
+      <img src="images/foods/silog/Chicksilog.jpg" alt="Chicksilog">
+      <div class="name">Chicksilog</div>
+      <div class="price">Php 90</div>
+      <div class="details">Silog meal consisting of chicken, garlic fried rice, and a sunny-side-up egg.</div>
+    </div>
+    <div class="box">
+      <img src="images/foods/silog/sisiglog.jpg" alt="Sisiglog">
+      <div class="name">Sisiglog</div>
+      <div class="price">Php 90</div>
+      <div class="details">Silog meal incorporating sisig, garlic fried rice, and a sunny-side-up egg.</div>
+    </div>
+    <div class="box">
+      <img src="images/foods/silog/spamsilog.jpg" alt="Spamsilog">
+      <div class="name">Spamsilog</div>
+      <div class="price">Php 89</div>
+      <div class="details">Silog meal comprising SPAM, garlic fried rice, and a sunny-side-up egg.</div>
+    </div>
+    <div class="box">
+      <img src="images/foods/silog/Bangsilog.jpg" alt="Bangsilog">
+      <div class="name">Bangsilog</div>
+      <div class="price">Php 90</div>
+      <div class="details">Silog meal composed of bangus (milkfish), garlic fried rice, and a sunny-side-up egg.</div>
+    </div>
+    <div class="box">
+      <img src="images/foods/silog/embosilog.jpg" alt="Embosilog">
+      <div class="name">Embosilog</div>
+      <div class="price">Php 90</div>
+      <div class="details">Silog meal including embutido (Filipino-style meatloaf), garlic fried rice, and a sunny-side-up egg.</div>
+    </div>
+    <div class="box">
+      <img src="images/foods/silog/tocilog.jpg" alt="Tocilog">
+      <div class="name">Tocilog</div>
+      <div class="price">Php 89</div>
+      <div class="details">Silog meal made with tocino (sweet cured pork), garlic fried rice, and a sunny-side-up egg.</div>
+    </div>
+    <div class="box">
+      <img src="images/foods/silog/baconsilog.png" alt="Baconsilog">
+      <div class="name">Baconsilog</div>
+      <div class="price">Php 89</div>
+      <div class="details">Silog meal featuring bacon, garlic fried rice, and a sunny-side-up egg.</div>
+    </div>
+    <div class="box">
+      <img src="images/foods/silog/cornsilog.jpg" alt="Cornsilog">
+      <div class="name">Cornsilog</div>
+      <div class="price">Php 78</div>
+      <div class="details">Silog meal combining corned beef, garlic fried rice, and a sunny-side-up egg.</div>
+    </div>
+    <div class="box">
+      <img src="images/foods/silog/hotsilog.jpg" alt="Hotsilog">
+      <div class="name">Hotsilog</div>
+      <div class="price">Php 72</div>
+      <div class="details">Silog meal with hotdog, garlic fried rice, and a sunny-side-up egg.</div>
+    </div>
+    <div class="box">
+      <img src="images/foods/silog/longsilog.jpg" alt="Longsilog">
+      <div class="name">Longsilog</div>
+      <div class="price">Php 72</div>
+      <div class="details">Silog meal consisting of longganisa (Filipino sausage), garlic fried rice, and a sunny-side-up egg.</div>
+    </div>
+  </div>
+  <!-- WINGS & DIP -->
+  <h2 class="category-title">WINGS & DIP</h2>
+  <div class="box-container">
+    <div class="box">
+      <img src="images/foods/wings and dips/wings and dip.jpg" alt="Wings & Dip">
+      <div class="name">Wings & Dip</div>
+      <div class="price">Php 180</div>
+      <div class="details">Chicken wings served with a dipping sauce for a flavorful snack or meal.</div>
+    </div>
   </div>
 </section>
 <!-- FOOTER -->
