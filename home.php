@@ -643,7 +643,7 @@ document.addEventListener('click', function(e) {
           <div class="about-card about-center">
             <h3>TRADITIONAL & MODERN</h3>
             <p>Silog at paboritong ulam under one roof! We serve classic Filipino comfort food and modern favorites, always with a smile.</p>
-            <a href="#" class="about-btn">Read More</a>
+            <a href="about.php" class="about-btn">Read More</a>
           </div>
           <div class="about-card">
             <img src="images/hungry meals.png" alt="Modern" />
@@ -774,7 +774,7 @@ document.addEventListener('click', function(e) {
         </li>
         <li style="font-size:0.95rem; color:#ccc; margin-bottom:0.7rem; border:none;">Sizzling Filipino dish with diced pork, onions, and chili peppers. Good For 3-4 people.</li>
       </ul>
-      <a href="#" class="about-btn">View More</a>
+      <a href="shop.php" class="about-btn">View More</a>
     </div>
   </div>
 </section>
