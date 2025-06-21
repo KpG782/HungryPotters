@@ -29,16 +29,15 @@
 
 ```
 / (static version root)
-├ components/         # Partial templates (header, footer)
 ├ css/                # Stylesheets
-│  ├ style.css        # Main stylesheet (Bootstrap + custom)
-│  └ shop.css
-├ images/             # Placeholder images for menu & about sections
-├ js/                 # Scripts (menu toggle, Swiper init)
-├ index.php           # Homepage with static menu
-├ about.php           # About section with static content
-├ contact.php         # Contact form (no backend)
-└ shop.php            # Menu listing (static)
+│  ├ style.css        # Main custom styles
+│  └ shop.css         # Shop-specific styles
+├ images/             # Placeholder & menu images
+├ js/                 # Scripts (menu toggle, carousel init)
+├ about.html          # About page with static content
+├ contact.html        # Contact form (no backend)
+├ index.html          # Homepage with static menu
+└ shop.html           # Menu listing (static)
 ```
 
 ---
@@ -66,7 +65,7 @@ For full PHP + MySQL integration (dynamic product loading, cart & wishlist, admi
 ## 👥 Team & Credits
 
 - **Full Stack Developer:** Ken Patrick Garcia 
-- **Team Members:** Mars, Timothy, Ejay Buscato
+- **Team Members:** Mars Maguddayao, Timothy Forte, Lanz Corpuz, Ejay Buscato
 
 ---
 
