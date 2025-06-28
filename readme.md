@@ -54,6 +54,15 @@
 
 ---
 
+# Screenshots
+
+![4](https://github.com/user-attachments/assets/e71decbd-e29f-40b9-8fb3-97d261cb538c)
+![1](https://github.com/user-attachments/assets/811230a3-24c4-4043-8b6c-7d2aeecd4fc4)
+![2](https://github.com/user-attachments/assets/252dc998-c15e-454e-b547-88caa8580866)
+
+
+---
+
 ## 🔗 Full-Functionality Version
 
 For full PHP + MySQL integration (dynamic product loading, cart & wishlist, admin panel), visit:
